@@ -6,7 +6,7 @@ GLFW is a free, Open Source, multi-platform library for OpenGL and OpenGL ES
 application development.  It provides a simple, platform-independent API for
 creating windows and contexts, reading input, handling events, etc.
 
-Version 3.1 is *not yet described*.
+Version 3.1.2 is _not yet described_.
 
 If you are new to GLFW, you may find the
 [introductory tutorial](http://www.glfw.org/docs/latest/quick.html) for GLFW
@@ -62,87 +62,9 @@ GLFW bundles a number of dependencies in the `deps/` directory.
 
 ## Changelog
 
- - Added `GLFWcursor` custom system cursor handle
- - Added `glfwCreateCursor`, `glfwDestroyCursor` and `glfwSetCursor` for
-   managing custom system cursors
- - Added `GLFWimage` struct for passing 32-bit RGBA images
- - Added monitor and adapter identifier access to native API
- - Added `glfwSetDropCallback` and `GLFWdropfun` for receiving dropped files
- - Added `glfwPostEmptyEvent` for allowing secondary threads to cause
-   `glfwWaitEvents` to return
- - Added `empty` test program for verifying posting of empty events
- - Added `glfwSetCharModsCallback` for receiving character events with modifiers
- - Added `glfwGetWindowFrameSize` for retrieving the size of the frame around
-   the client area of a window
- - Added `GLFW_AUTO_ICONIFY` for controlling whether full screen windows
-   automatically iconify (and restore the previous video mode) on focus loss
- - Added `GLFW_DONT_CARE` for indicating that any value is acceptable
- - Added `GLFW_DOUBLEBUFFER` for controlling whether to use double buffering
- - Added `GLFW_CONTEXT_RELEASE_BEHAVIOR` and values
-   `GLFW_ANY_RELEASE_BEHAVIOR`, `GLFW_RELEASE_BEHAVIOR_FLUSH` and
-   `GLFW_RELEASE_BEHAVIOR_NONE` for `GL_KHR_context_flush_control` support
- - Added `GLFW_INCLUDE_ES31` for including the OpenGL ES 3.1 header
- - Added `GLFW_FLOATING` for creating always-on-top windowed mode windows
- - Added `GLFW_FOCUSED` window hint for controlling initial input focus
- - Added *partial and experimental* support for Wayland
- - Added *partial and experimental* support for Mir
- - Changed the default of `GLFW_REFRESH_RATE` to `GLFW_DONT_CARE` to maintain
-   the default behavior
- - Changed static library to build as position independent code for easier use
-   from the Rust language
- - Bugfix: The debug context attribute was set from `GL_ARB_debug_output` even
-           when a debug context had not been requested
- - Bugfix: The particles example was not linked against the threading library
- - Bugfix: The cursor was not positioned over newly created full screen windows
- - [Cocoa] Added `_GLFW_USE_RETINA` to control whether windows will use the full
-           resolution on Retina displays
- - [Cocoa] Bugfix: Using a 1x1 cursor for hidden mode caused some screen
-                   recorders to fail
- - [Cocoa] Bugfix: Some Core Foundation objects were leaked during joystick
-                   enumeration and termination
- - [Cocoa] Bugfix: One copy of each display name string was leaked
- - [Cocoa] Bugfix: Monitor enumeration caused a segfault if no `NSScreen` was
-                   found for a given `CGDisplay`
- - [Cocoa] Bugfix: Modifier key events were lost if the corresponding modifier
-                   bit field was unchanged
- - [Cocoa] Bugfix: Joystick enumeration took hundreds of ms on some systems
- - [Cocoa] Bugfix: The cursor was hidden when the user resized a GLFW window
- - [Win32] Enabled generation of pkg-config file for MinGW
- - [Win32] Removed option to require explicitly linking against `winmm.dll`
- - [Win32] Bugfix: Failure to load winmm or its functions was not reported to
-                   the error callback
- - [Win32] Bugfix: Some keys were reported based on the current layout instead
-                   of their physical location
- - [Win32] Bugfix: Maximized hidden windows were restored by `glfwShowWindow`
- - [Win32] Bugfix: Context re-creation was not triggered by sRGB hint
- - [Win32] Bugfix: Full screen windows were incorrectly sized and placed on some
-                   systems
- - [Win32] Bugfix: Gamma ramp functions acted on entire desktop instead of the
-                   specified monitor
- - [Win32] Bugfix: The wrong incorrect physical size was returned for
-                   non-primary monitors
- - [Win32] Bugfix: X-axis scroll offsets were inverted
- - [X11] Added run-time support for systems lacking the XKB extension
- - [X11] Made GLX 1.3 the minimum supported version
- - [X11] Replaced `XRRGetScreenResources` with `XRRGetScreenResourcesCurrent`
-         for monitor property retrieval
- - [X11] Bugfix: The case of finding no usable CRTCs was not detected
- - [X11] Bugfix: Detection of broken Nvidia RandR gamma support did not verify
-                 that at least one CRTC was present
- - [X11] Bugfix: A stale `_NET_SUPPORTING_WM_CHECK` root window property would
-                 cause an uncaught `BadWindow` error
- - [X11] Bugfix: No check was made for the presence of GLX 1.3 when
-                 `GLX_SGIX_fbconfig` was unavailable
- - [X11] Bugfix: The message type of ICCCM protocol events was not checked
- - [X11] Bugfix: `glfwDestroyWindow` did not flush the output buffer
- - [X11] Bugfix: Window frame interactions were reported as focus events
- - [X11] Bugfix: Workaround for legacy Compiz caused flickering during resize
- - [X11] Bugfix: The name pointer of joysticks were not cleared on disconnection
- - [X11] Bugfix: Video mode dimensions were not rotated to match the CRTC
- - [X11] Bugfix: Unicode character input ignored dead keys
- - [X11] Bugfix: X-axis scroll offsets were inverted
- - [X11] Bugfix: Full screen override redirect windows were not always
-                 positioned over the specified monitor
+ - Bugfix: Initialization failed on headless systems
+ - Bugfix: The cached current context could get out of sync
+ - [Cocoa] Bugfix: The cached `NSScreen` for a monitor could get out of sync
 
 
 ## Contact
@@ -181,6 +103,7 @@ skills.
  - Doug Binks
  - blanco
  - Martin Capitanio
+ - Chi-kwan Chan
  - Lambert Clara
  - Andrew Corrigan
  - Noel Cower
@@ -190,6 +113,7 @@ skills.
  - Michael Dickens
  - Jonathan Dummer
  - Ralph Eastwood
+ - Siavash Eliasi
  - Michael Fogleman
  - Gerald Franz
  - GeO4d
@@ -206,6 +130,7 @@ skills.
  - Osman Keskin
  - Cameron King
  - Peter Knut
+ - Eric Larson
  - Robin Leffmann
  - Glenn Lewis
  - Shane Liesegang
@@ -215,8 +140,10 @@ skills.
  - Hans Mackowiak
  - Kyle McDonald
  - David Medlock
+ - Bryce Mehring
  - Jonathan Mercier
  - Marcel Metz
+ - Jonathan Miller
  - Kenneth Miller
  - Bruce Mitchener
  - Jack Moffitt
@@ -230,10 +157,12 @@ skills.
  - Peoro
  - Braden Pellett
  - Arturo J. Pérez
+ - Emmanuel Gil Peyrot
  - Cyril Pichard
  - Pieroman
  - Jorge Rodriguez
  - Ed Ropple
+ - Aleksey Rybalkin
  - Riku Salminen
  - Brandon Schaefer
  - Sebastian Schuberth
@@ -247,9 +176,11 @@ skills.
  - Julian Squires
  - Johannes Stein
  - Justin Stoecker
+ - Elviss Strazdins
  - Nathan Sweet
  - TTK-Bandit
  - Sergey Tikhomirov
+ - A. Tombs
  - Samuli Tuomola
  - urraka
  - Jari Vetoniemi

@@ -142,7 +142,7 @@ typedef struct _GLFWcursor      _GLFWcursor;
     }
 
 // Swaps the provided pointers
-#if 0
+#ifndef __cplusplus
 #define _GLFW_SWAP_POINTERS(x, y) \
     {                             \
         void* t;                  \
